@@ -3,8 +3,8 @@ import CoinsRow from './CoinsRow'
 
 const TableCoins = ({ coins, search }) => {
 
-    const titles = ["#", "Coin", "Price", "Price Change", "24h Volume"];
-    const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()))
+    const titles = ["#", "Coin", "Price", "Price Change", "24h Volume","details"];
+    const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()) || coin.symbol.toLowerCase().includes(search.toLowerCase()))
     return (
         <div>
             <table className='table table-dark mt-4 table-hover'>
