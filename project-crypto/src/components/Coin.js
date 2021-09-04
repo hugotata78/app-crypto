@@ -27,7 +27,7 @@ const Coin = ({ coin }) => {
                 </p>
                 <p style={{ fontSize: '20px', margin: '0' }}>Volume: <span>{coin.market_data && coin.market_data.total_volume.usd}</span></p>
                 <h3 className='mt-4'>Description: </h3>
-                <p >{coin.description && coin.description.es || 'No description'}</p>
+                <p >{(coin.description && coin.description.es) || 'No description'}</p>
 
             </div>
         </div>

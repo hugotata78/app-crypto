@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import TableCoins from '../components/TableCoins';
+import { actionGetCoins } from '../redux/actions/coinActions';
 
 
 function ContainerListCoins() {
 
-  const [coins, setCoins] = useState([])
+  const dispatch = useDispatch()
+  const coins = useSelector(state => state.coinReducer.listCoins)
   const [search, setSearch] = useState('')
-  const [data,setData] = useState(null)
-  const order = data || 'market_cap_desc'
-  const getCoins = async () => {
-    const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${order}&per_page=100&page=1&sparkline=false`)
-    setCoins(response.data)
-  }
+  const [data, setData] = useState('market_cap_desc')
 
+  const handleOnClick = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+    
+  }
   useEffect(() => {
-    getCoins()
-  }, [])
+    dispatch(actionGetCoins(data))
+  }, [dispatch, data])
+
+
   return (
     <div className="container">
       <div className='row'>
@@ -28,6 +32,12 @@ function ContainerListCoins() {
           autoFocus
           onChange={e => setSearch(e.target.value)}
         />
+        <select class="form-select mt-4" aria-label="Default select example" onClick={e=>handleOnClick(e)}>
+          <option value="market_cap_asc">Ascending Capital Market</option>
+          <option value="market_cap_desc" selected>Descending Capital Market</option>
+          <option value="volume_asc">Volume Ascending</option>
+          <option value="volume_desc">Volume Down</option>
+        </select>
         <TableCoins coins={coins} search={search} />
       </div>
     </div>

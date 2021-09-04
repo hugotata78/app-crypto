@@ -1,22 +1,19 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Coin from '../components/Coin'
+import { actionGetCoin } from '../redux/actions/coinActions'
 
 const ContainerCoin = ()=>{
 
     const { id } = useParams()
-    const [coin,setCoin] = useState({})
-
-    const getCoin = async ()=>{
-        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`)
-        console.log(response.data)
-        setCoin(response.data)
-    }
+    const coin = useSelector(state=>state.coinReducer.coin)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
-        getCoin()
-    },[])
+        dispatch(actionGetCoin(id))
+    },[dispatch,id])
 
     return(
         <div className='container'>
