@@ -1,21 +1,25 @@
 import { COIN, COINS } from "../actions/coinActions"
 
-const initialState ={
-    listCoins:[],
-    coin:{}
+const initialState = {
+    coin: {},
+    error: false,
+    listCoins: [],
+    loading: false
 }
 
-const coinReducer = (state=initialState,action)=>{
-    switch(action.type){
+const coinReducer = (state = initialState, action) => {
+    switch (action.type) {
+
         case COINS:
-            return{
+            return {
                 ...state,
-                listCoins:action.payload
+                listCoins: action.payload,
             }
+        
         case COIN:
-            return{
+            return {
                 ...state,
-                coin:action.payload
+                coin: action.payload
             }
         default:
             return state

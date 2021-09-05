@@ -14,7 +14,7 @@ function ContainerListCoins() {
   const handleOnClick = (e) => {
     e.preventDefault()
     setData(e.target.value)
-    
+
   }
   useEffect(() => {
     dispatch(actionGetCoins(data))
@@ -32,12 +32,13 @@ function ContainerListCoins() {
           autoFocus
           onChange={e => setSearch(e.target.value)}
         />
-        <select class="form-select mt-4" aria-label="Default select example" onClick={e=>handleOnClick(e)}>
+        <select class="form-select mt-4" aria-label="Default select example" onClick={e => handleOnClick(e)}>
           <option value="market_cap_asc">Ascending Capital Market</option>
           <option value="market_cap_desc" selected>Descending Capital Market</option>
           <option value="volume_asc">Volume Ascending</option>
           <option value="volume_desc">Volume Down</option>
         </select>
+
         <TableCoins coins={coins} search={search} />
       </div>
     </div>
