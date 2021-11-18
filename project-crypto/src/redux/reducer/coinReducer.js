@@ -1,10 +1,11 @@
-import { COIN, COINS } from "../actions/coinActions"
+import { COIN, COINS, GET_LIST_COINS } from "../actions/coinActions"
 
 const initialState = {
     coin: {},
     error: false,
     listCoins: [],
-    loading: false
+    loading: false,
+    coins:[]
 }
 
 const coinReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const coinReducer = (state = initialState, action) => {
             return {
                 ...state,
                 coin: action.payload
+            }
+        case GET_LIST_COINS:
+            return{
+                ...state,
+                coins:action.payload
             }
         default:
             return state
