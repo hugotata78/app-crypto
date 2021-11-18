@@ -49,10 +49,10 @@ export const GET_LIST_COINS = 'GET_LIST_COINS'
 // }
 
 
-const actionGetCoins = (data) => {
+const actionGetCoins = (order,page) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${data}&per_page=100&page=1&sparkline=false`)
+            const response = await axios.get(`http://localhost:4000/api/coins?order=${order}&page=${page}`)
             dispatch({
                 type: COINS,
                 payload: response.data
@@ -66,7 +66,7 @@ const actionGetCoins = (data) => {
 const actionGetCoin = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`)
+            const response = await axios.get(`http://localhost:4000/api/coins/${id}`)
             dispatch({
                 type: COIN,
                 payload: response.data

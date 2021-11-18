@@ -9,16 +9,27 @@ function ContainerListCoins() {
   const dispatch = useDispatch()
   const coins = useSelector(state => state.coinReducer.listCoins)
   const [search, setSearch] = useState('')
-  const [data, setData] = useState('market_cap_desc')
+  const [order, setOrder] = useState('market_cap_desc')
+  const [page, setPage] = useState(1)
 
   const handleOnClick = (e) => {
     e.preventDefault()
-    setData(e.target.value)
+    setOrder(e.target.value)
 
   }
+
+  const nextPage = (e) => {
+    e.preventDefault()
+    setPage(page + 1)
+  }
+
+  const prevPage = (e) => {
+    e.preventDefault()
+    setPage(page <= 1 ? 1 : page - 1)
+  }
   useEffect(() => {
-    dispatch(actionGetCoins(data))
-  }, [dispatch, data])
+    dispatch(actionGetCoins(order, page))
+  }, [dispatch, order, page])
 
 
   return (
@@ -40,6 +51,15 @@ function ContainerListCoins() {
         </select>
 
         <TableCoins coins={coins} search={search} />
+        <div className='d-flex justify-content-center mt-4'>
+          {
+            page > 1 ?
+              <button className='btn btn-success m-2' onClick={prevPage}>Prev</button>
+              :
+              <button className='btn btn-success m-2' disabled onClick={prevPage}>Prev</button>
+          }
+          <button className='btn btn-success m-2' onClick={nextPage}>Next</button>
+        </div>
       </div>
     </div>
   );
