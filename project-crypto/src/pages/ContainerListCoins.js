@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TableCoins from '../components/TableCoins';
+import { DataContext } from '../context/DataProvider';
 import { actionGetCoins } from '../redux/actions/coinActions';
 
 
@@ -9,24 +11,13 @@ function ContainerListCoins() {
   const dispatch = useDispatch()
   const coins = useSelector(state => state.coinReducer.listCoins)
   const [search, setSearch] = useState('')
-  const [order, setOrder] = useState('market_cap_desc')
-  const [page, setPage] = useState(1)
+  const value = useContext(DataContext)
+  const [order] = value.order
+  const [page] = value.page
+  const handleOnClick = value.handleOnClick
+  const nextPage = value.nextPage
+  const prevPage = value.prevPage
 
-  const handleOnClick = (e) => {
-    e.preventDefault()
-    setOrder(e.target.value)
-
-  }
-
-  const nextPage = (e) => {
-    e.preventDefault()
-    setPage(page + 1)
-  }
-
-  const prevPage = (e) => {
-    e.preventDefault()
-    setPage(page <= 1 ? 1 : page - 1)
-  }
   useEffect(() => {
     dispatch(actionGetCoins(order, page))
   }, [dispatch, order, page])
