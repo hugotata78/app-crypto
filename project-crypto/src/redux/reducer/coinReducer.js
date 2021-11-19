@@ -1,4 +1,4 @@
-import { COIN, COINS, GET_LIST_COINS } from "../actions/coinActions"
+import { COIN, COINS, RESET_STATE } from "../actions/coinActions"
 
 const initialState = {
     coin: {},
@@ -22,10 +22,10 @@ const coinReducer = (state = initialState, action) => {
                 ...state,
                 coin: action.payload
             }
-        case GET_LIST_COINS:
+        case RESET_STATE:
             return{
                 ...state,
-                coins:action.payload
+                coin:null
             }
         default:
             return state

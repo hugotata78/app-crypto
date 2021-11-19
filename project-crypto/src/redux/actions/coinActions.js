@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const COINS = 'COINS'
 export const COIN = 'COIN'
-export const GET_LIST_COINS = 'GET_LIST_COINS'
+export const RESET_STATE = 'RESET_STATE'
 // export const FETCH_COIN_REQUEST = 'FETCH_COIN_REQUEST'
 // export const FETCH_COINS_REQUEST = 'FETCH_COINS_REQUEST'
 // export const FETCH_COIN_SUCCESS = 'FETCH_COIN_SUCCESS'
@@ -77,17 +77,9 @@ const actionGetCoin = (id) => {
     }
 }
 
-const actionsGetListCoins = (page)=>{
-    return async (dispatch)=>{
-        try {
-            const response = await axios.get(`http://localhost:4000/api/coins?page=${page}`)
-            dispatch({
-                type: GET_LIST_COINS,
-                payload:response.data
-            })
-        } catch (error) {
-            console.log(error)
-        }
+const actionsResetState = ()=>{
+    return {
+        type:RESET_STATE
     }
 }
-export { actionGetCoins, actionGetCoin, actionsGetListCoins }
+export { actionGetCoins, actionGetCoin, actionsResetState }

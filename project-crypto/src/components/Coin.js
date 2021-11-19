@@ -4,11 +4,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Coin = ({ coin }) => {
+
     return (
         <div className="card bg-dark mt-4 w-100 p-4 m-auto">
             <Link to='/'>
-                <button className='btn btn-outline-primary btn-lg' title='Home'>
-                    <FontAwesomeIcon icon={faArrowAltCircleLeft}/>
+                <button
+                    className='btn btn-outline-primary btn-lg'
+                    title='Home'
+                >
+                    <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                 </button>
             </Link>
             <img src={coin.image && coin.image.large} className="w-25 mt-4 m-auto img-fluid" alt={coin.name} />
