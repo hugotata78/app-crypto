@@ -9,7 +9,7 @@ import { actionGetCoins } from '../redux/actions/coinActions';
 function ContainerListCoins() {
 
   const dispatch = useDispatch()
-  const coins = useSelector(state => state.coinReducer.listCoins)
+  const coins = useSelector(state => state.coinReducer.coins)
   const [search, setSearch] = useState('')
   const value = useContext(DataContext)
   const [order] = value.order
